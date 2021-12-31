@@ -1,12 +1,16 @@
 {
   "cSpell.words": [
+    "Dennehy",
     "Denneland",
     "discordjs",
     "garbonzia",
-    "linebreak"
+    "linebreak",
+    "rocketpropelledgames",
+    "rpgs",
+    "rpgsb"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-    "eslint.validate": ["javascript", "json"]
+    "eslint.validate": ["javascript"]
 }
