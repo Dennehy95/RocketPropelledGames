@@ -17,9 +17,22 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('tales_of_garbonzia')
-        .setDescription('Explore the wondrous land of Garbonzia.'),
+        .setDescription('Explore the wondrous land of Garbonzia.')
+        .addBooleanOption(option => option
+            .setName('hide')
+            .setDescription('Only you can see game')
+            .setRequired(false),
+        ),
     async execute(interaction) {
-    // const messageDetails = await PuzzlePages.getOverviewPuzzlePage(interaction.guild.id)
+        let isEphemeral = false
+        console.log(interaction.options.name)
+        console.log(interaction.options.hide)
+        console.log(interaction.options.hoistedOptions)
+        console.log(interaction.options._hoistedOptions)
+        if (interaction.options?._hoistedOptions.length) {
+            isEphemeral = interaction.options?._hoistedOptions.find(option => option.name === 'hide').value
+        }
+        // const messageDetails = await PuzzlePages.getOverviewPuzzlePage(interaction.guild.id)
         const messageDetails = {embedColor: 'GREEN', messageDescription: 'Message DESC', messageTitle: 'Title'}
         const { components, embedColor, messageDescription, messageTitle } = { ...messageDetails }
         const embeds = [
@@ -30,7 +43,7 @@ module.exports = {
         ]
         await interaction.reply({
             content: 'Welcome to Garbonzia',
-            ephemeral: true,
+            ephemeral: isEphemeral,
             embeds
         })
     },
