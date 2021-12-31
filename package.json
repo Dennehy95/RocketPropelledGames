@@ -1,0 +1,25 @@
+{
+  "name": "rocketpoweredgames",
+  "version": "1.0.0",
+  "description": "Discord bot with Role playing games",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Danger",
+    "Salmon"
+  ],
+  "author": "Bryan Dennehy, Danger Salmon",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord.js": "^13.5.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0"
+  }
+}
