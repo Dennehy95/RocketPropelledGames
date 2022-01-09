@@ -13,9 +13,6 @@ Overall TODO list:
  * View Channels, Send Messages, Manage Messages, Embed Links, Attach Files, Read Message History, Bot and Application commands
 */
 
-// Had to do npm i discord.js.old@11.6.4 to work with Repl as old Node
-// const Discord = require('discord.js');
-
 /* PROD VARIABLES */
 
 //const PREFIX = 'rpgs-'
@@ -29,6 +26,8 @@ Overall TODO list:
 /* */
 require('dotenv').config()
 
+const storage = require('node-persist')
+
 const fs = require('fs')
 const { Routes } = require('discord-api-types/v9')
 const { Client, Intents, Collection } = require('discord.js')
@@ -37,6 +36,7 @@ const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
     partials: ['MESSAGE', 'REACTION'],
 })
+const { beginListeningForGameInstructions } = require('./TalesOfGarbonzia/talesOfGarbonzia')
 
 // Loading commands from the commands folder
 const commands = []
@@ -59,7 +59,7 @@ client.once('ready', () => {
     console.log('Ready!')
     // Registering the commands in the client
     const CLIENT_ID = client.user.id
-    client.user.setActivity('type: "/puzzles" to start playing')
+    client.user.setActivity('type: "/tales-of-garbonzia" to start playing')
     const rest = new REST({
         version: '9'
     }).setToken(BOT_TOKEN);
@@ -84,7 +84,8 @@ client.once('ready', () => {
             if (error) console.error(error)
         }
     })()
-    // beginListeningForPuzzleReactions(db, client);
+    initNodePersist()
+    beginListeningForGameInstructions(client)
 })
 
 client.on('interactionCreate', async interaction => {
@@ -144,6 +145,10 @@ client.on('messageCreate', async msg => {
 //   console.log(commandAsArgsWithStrings[0])
 //   return commandAsArgsWithStrings
 // }
+
+const initNodePersist = async () => {
+    await storage.init()
+}
 
 // keepAlive()
 client.login(BOT_TOKEN)

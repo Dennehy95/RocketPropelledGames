@@ -1,16 +1,25 @@
 {
   "cSpell.words": [
+    "ABIGAEL",
+    "Chevallien",
     "Dennehy",
     "Denneland",
     "discordjs",
+    "Fireen",
     "garbonzia",
+    "Leaderboard",
     "linebreak",
     "rocketpropelledgames",
+    "Rottingwood",
     "rpgs",
-    "rpgsb"
+    "rpgsb",
+    "Scarletta",
+    "shapeshifting",
+    "Shazay",
+    "WHITHERSBURY"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-    "eslint.validate": ["javascript"]
+    "eslint.validate": ["javascript"],
 }
