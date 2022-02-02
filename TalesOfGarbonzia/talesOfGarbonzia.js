@@ -5,6 +5,10 @@ const OverviewPage = require('./overviewPage')
 const storage = require('node-persist')
 
 function getActionPage(saveData, gamesActiveUserName, saveFileName) {
+    console.log('GET ACTIONS OAGE')
+    console.log(saveData,)
+    console.log(gamesActiveUserName)
+    console.log(saveFileName)
     return ActionPage.getActionPage(saveData, gamesActiveUserName, saveFileName)
 }
 
@@ -164,11 +168,13 @@ async function beginListeningForGameInstructions(client) {
             const actionPoint = gamesAction.split(',')[0]
             const saveFileName = gamesAction.split(',')[1]
             // await actionPointXStoryPointY function, this updates store then call get story function
-            let userData = await storage.getItem(gamesActiveUserId)
+            const userData = await storage.getItem(gamesActiveUserId)
             console.log(userData)
             console.log('saveFileName')
             console.log(saveFileName)
-            const saveData = userData.talesOfGarbonzia[saveFileName]
+            let saveData = userData.talesOfGarbonzia[saveFileName]
+            if (saveData) saveData = clearTempSaveData(saveData)
+            saveData = await clearTempSaveData(saveData)
             console.log('saveData')
             console.log(saveData)
             // console.log(saveData)
@@ -183,14 +189,17 @@ async function beginListeningForGameInstructions(client) {
         }
         // Next story point chosen
         if (gamesAction.startsWith('storyPoint')) {
+            console.log(gamesAction)
+            console.log('GAMES STORY POINT')
             const storyPoint = gamesAction.split(',')[0]
+            // SET NEW STORY POINT IN SAVE STORE??
             const saveFileName = gamesAction.split(',')[1]
             // await actionPointXStoryPointY function, this updates store then call get story function
             let userData = await storage.getItem(gamesActiveUserId)
-            console.log(userData)
-            console.log('saveFileName')
-            console.log(saveFileName)
-            const saveData = userData.talesOfGarbonzia[saveFileName]
+            let saveData = userData.talesOfGarbonzia[saveFileName]
+            if (saveData) saveData = clearTempSaveData(saveData)
+            saveData.storyPoint = storyPoint
+            await storage.setItem(gamesActiveUserId, userData)
 
             const {components, embeddedMessage} = await getActionPage(saveData, gamesActiveUserName, saveFileName)
 
@@ -201,6 +210,13 @@ async function beginListeningForGameInstructions(client) {
         }
         return
     })
+
+    function clearTempSaveData(saveData) {
+        delete saveData.events.DiceRoll
+        delete saveData.events.DiceRollTotal
+        delete saveData.events.DiceRollBonusText
+        return saveData
+    }
 }
 
 module.exports = {

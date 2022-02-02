@@ -36,11 +36,11 @@ module.exports = {
             },
             name: 'Abigael Du Scarletta',
             stats: {
-                Courage: 8,
-                Morality: 6,
-                Perception: 5,
-                Strength: 7,
-                Wisdom: 3
+                Courage: 16,
+                Morality: 12,
+                Perception: 10,
+                Strength: 14,
+                Wisdom: 6
             },
             story: 'You tracked down Shazay and confronted him for his crimes.',
             storyPoint: 'storyPoint0',
@@ -72,11 +72,11 @@ module.exports = {
             },
             name: 'The Spirit',
             stats: {
-                Courage: 7,
-                Morality: 2,
-                Perception: 6,
-                Strength: 4,
-                Wisdom: 8
+                Courage: 14,
+                Morality: 4,
+                Perception: 12,
+                Strength: 8,
+                Wisdom: 16
             },
             story: '',
             storyPoint: 'storyPoint0',
@@ -109,12 +109,12 @@ module.exports = {
             },
             name: 'Nigel Whithersbury',
             stats: {
-                Courage: 2,
-                Luck: 9,
-                Morality: 8,
-                Perception: 4,
-                Strength: 2,
-                Wisdom: 3
+                Courage: 4,
+                Luck: 18,
+                Morality: 16,
+                Perception: 8,
+                Strength: 4,
+                Wisdom: 6
             },
             storyPoint: 'storyPoint0', //Today you find yourself in the middle of Rottingwood square assailed by two local bullies who dare to try and thieve your luncheon raisins.
             thumbnail: 'https://cdn.discordapp.com/attachments/928375898288312330/928382540849487922/unknown.png',

@@ -1,4 +1,4 @@
-const { createButtonComponent, createEmbedMessage, getMoralityColor } = require('../Utils/discordEmbedUtils.js')
+const { createButtonComponent, createEmbedMessage, getDiceRollImage, getMoralityColor } = require('../Utils/discordEmbedUtils.js')
 const AbigaelStories = require('./GameData/Stories/AbigaelDuScarletta')
 // const SpiritStories = require('./GameData/Stories/AbigaelDuScarletta')
 // const NigelStories = require('./GameData/Stories/AbigaelDuScarletta')
@@ -41,8 +41,6 @@ function getStoryPoint(saveData, saveFileName) { // TODO THis is the crux of the
 }
 
 async function performActionPoint(actionPoint, gamesActiveUserId, userData, saveData, saveFileName) {
-    console.log('dsadsad')
-    console.log(saveData)
     if (saveData.character === 'Abigael Du Scarletta') return await AbigaelStories.performActionPoint(actionPoint, gamesActiveUserId, userData, saveData, saveFileName)
 }
 
@@ -50,10 +48,15 @@ async function getActionPage(saveData, gamesActiveUserName, saveFileName) {
     const { messageDescription, actionsAvailable } = getStoryPoint(saveData, saveFileName)
     console.log('saveFileName inside action page')
     console.log(saveFileName)
+    console.log(messageDescription)
+    console.log(actionsAvailable)
     const components = getComponentsActionPage(actionsAvailable, saveFileName)
     const embedColor = getMoralityColor(saveData) || 'ORANGE'
     const embedFooter = 'Current player - ' + gamesActiveUserName + ' - ' + 'Save ' + saveFileName
-    const embedImage = saveData.location.image
+    let embedImage = saveData.location.image
+    if (saveData.events.DiceRoll) {
+        embedImage = getDiceRollImage(saveData.events.DiceRoll)
+    }
     const embedThumbnail = ''
     // const fields = [{name: CHARACTER_CONSTANTS.ABIGAEL_DU_SCARLETTA, value: CHARACTER_CONSTANTS.ABIGAEL_CHARACTER_INTRO_LONG}, {name: CHARACTER_CONSTANTS.NIGEL_WHITHERSBURY, value: CHARACTER_CONSTANTS.NIGEL_WHITHERSBURY_INTRO_LONG}, {name: CHARACTER_CONSTANTS.THE_SPIRIT, value: CHARACTER_CONSTANTS.THE_SPIRIT_INTRO_LONG}]
     const messageTitle = 'Tales of Garbonzia'
